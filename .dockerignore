@@ -1,0 +1,12 @@
+Dockerfile
+env
+.git
+.gitignore
+.gitlab-ci.yml
+.github
+.pytest_cache
+
+**/*.egg-info
+**/__pycache__
+**/*.un~
+**/*.swp
