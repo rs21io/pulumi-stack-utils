@@ -1,5 +1,5 @@
-# Project Name
-![img](https://img.shields.io/badge/build-failing-red)
+# pulumi-stack-utils
+![test workflow](https://github.com/rs21io/pulumi-stack-utils/actions/workflows/test.yml/badge.svg)
 
 Project Description
 
