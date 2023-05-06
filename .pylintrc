@@ -1,9 +1,0 @@
-[MASTER]
-ignore = test
-
-[MESSAGES CONTROL]
-disable = C0330, C0326
-
-[FORMAT]
-max-line-length = 88
-good-names = f,i,j,k,n,t,v,x,y,z,df
