@@ -1,4 +1,4 @@
-name: tests
+name: lint
 
 on:
   push:
@@ -8,7 +8,7 @@ on:
       - "*"
 
 jobs:
-  test:
+  lint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -18,5 +18,5 @@ jobs:
           cache: "pip"
       - name: Install packages
         run: pip install .
-      - name: Run tests
-        run: py.test test/ --cov pulumi_stack_utils
+      - name: Lint code
+        run: pylint pulumi_stack_utils
