@@ -17,6 +17,6 @@ jobs:
           python-version: "3.9"
           cache: "pip"
       - name: Install packages
-        run: pip install .
+        run: pip install .[dev]
       - name: Lint code
         run: pylint pulumi_stack_utils
