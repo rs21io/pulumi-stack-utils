@@ -22,6 +22,10 @@ dev = [
 
 [tool.pylint.'FORMAT']
 max-line-length = 88
+good-names = "f,k,v,s3"
 
 [tool.pylint.'MASTER']
 ignore = "test"
+
+[tool.pylint.'MESSAGES CONTROL']
+disable = "C0114"
