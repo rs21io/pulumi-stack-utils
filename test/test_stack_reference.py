@@ -32,23 +32,30 @@ def mock_download_fileobj(stream):
 
 class TestStackReference:
     @mock.patch("boto3.resource")
-    def setup_method(self, _, mock_s3):
-        """This setup method is optional and will run before every test.
-        Good for things class instantiation or setting variables
-        that will be reused in multiple tests.
-        """
+    def test_get_output(self, mock_s3):
         mock_object = mock.MagicMock()
         mock_object.last_modified = datetime.now(tz=tzutc())
         mock_object.download_fileobj = mock_download_fileobj
         mock_s3.return_value.Object.return_value = mock_object
         stack_name = "test-stack"
-        self.ref = stack_reference.StackReference(
+        ref = stack_reference.StackReference(
             stack_name, backend_url="s3://test-bucket/test-prefix/"
         )
-        self.ref._s3 = mock_s3
+        output = ref.get_output("test-output")
+        assert output == "test-value"
 
-    def test_get_output(self):
-        output = self.ref.get_output("test-output")
+    @mock.patch("boto3.resource")
+    def test_read_config(self, mock_s3):
+        # change working directory to config directory
+        mock_object = mock.MagicMock()
+        mock_object.last_modified = datetime.now(tz=tzutc())
+        mock_object.download_fileobj = mock_download_fileobj
+        mock_s3.return_value.Object.return_value = mock_object
+        prev_dir = os.getcwd()
+        os.chdir("test/test_config")
+        ref = stack_reference.StackReference("test-stack")
+        os.chdir(prev_dir)
+        output = ref.get_output("test-output")
         assert output == "test-value"
 
     def test_config_not_found(self):
