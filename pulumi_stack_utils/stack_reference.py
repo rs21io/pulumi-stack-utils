@@ -2,6 +2,7 @@ import json
 from datetime import datetime
 from io import BytesIO
 from pathlib import Path
+from typing import Any
 
 import boto3
 import yaml
@@ -11,7 +12,7 @@ from dateutil.tz import tzutc
 class StackReference:
     """Object referencing the state of a Pulumi stack in S3"""
 
-    def __init__(self, stack_name: str, backend_url: str = None):
+    def __init__(self, stack_name: str, backend_url: str = None):  # type: ignore
         self.stack_name = stack_name
         self._outputs: dict = {}
 
@@ -33,14 +34,13 @@ class StackReference:
 
         bucket_name, prefix = backend_url.split("/", 3)[2:]
         key = str(Path(prefix).joinpath(".pulumi", "stacks", f"{stack_name}.json"))
-        self._bucket_name = bucket_name
-        self._state_object_key = key
-        self._s3 = boto3.resource("s3")
-        self._state_object = self._s3.Object(bucket_name, key)
+        s3 = boto3.resource("s3")
+        self._state_object = s3.Object(bucket_name, key)
+        print(type(self._state_object))
         self.stack_last_modified: datetime = datetime(2000, 1, 1, tzinfo=tzutc())
 
     @property
-    def outputs(self):
+    def outputs(self) -> dict:
         """The outputs of the stack"""
         last_modified = self.state_object.last_modified
         if last_modified > self.stack_last_modified:
@@ -71,6 +71,6 @@ class StackReference:
         state = json.loads(stream.getvalue().decode("utf-8"))
         return state
 
-    def get_output(self, output_name: str):
+    def get_output(self, output_name: str) -> Any:
         """Retrieve a stack output by name"""
         return self.outputs.get(output_name)
