@@ -1,7 +1,10 @@
 [project]
 name = "pulumi-stack-utils"
 description = "Utilities for working with Pulumi stacks"
-version = "0.1.1"
+readme = "README.md"
+repository = "https://github.com/rs21io/pulumi-stack-utils"
+license = "BSD-2-Clause"
+version = "0.1.0"
 authors = [
     { name="James Arnold", email="james@rs21.io" }
 ]
@@ -10,6 +13,7 @@ dependencies = [
     "pulumi",
     "pyyaml",
 ]
+keywords = ["pulumi", "iac"]
 
 [project.optional-dependencies]
 dev = [
