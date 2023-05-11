@@ -36,7 +36,6 @@ class StackReference:
         key = str(Path(prefix).joinpath(".pulumi", "stacks", f"{stack_name}.json"))
         s3 = boto3.resource("s3")
         self._state_object = s3.Object(bucket_name, key)
-        print(type(self._state_object))
         self.stack_last_modified: datetime = datetime(2000, 1, 1, tzinfo=tzutc())
 
     @property
