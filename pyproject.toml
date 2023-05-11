@@ -1,7 +1,7 @@
 [project]
 name = "pulumi-stack-utils"
 description = "Utilities for working with Pulumi stacks"
-version = "0.1.0"
+version = "0.1.1"
 authors = [
     { name="James Arnold", email="james@rs21.io" }
 ]
