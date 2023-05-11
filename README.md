@@ -25,7 +25,7 @@ from pulumi_stack_utils import StackReference
 
 # If backend_url isn't provided the package will try and read it
 # from the Pulumi.yaml file in the cwd
-ref = StackReference("organization/project/my-stack", backend_url="s3://state-backend/prefix")
+ref = StackReference("project/my-stack", backend_url="s3://state-backend/prefix")
 output = ref.get_output("myOutput")
 ```
 
