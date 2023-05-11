@@ -2,10 +2,10 @@ name: lint
 
 on:
   push:
-    # branches-ignore:
-    #   - main
-    # tags-ignore:
-    #   - "*"
+    branches-ignore:
+      - main
+    tags-ignore:
+      - "*"
 
 jobs:
   lint:
